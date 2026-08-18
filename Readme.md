@@ -49,4 +49,11 @@ This provides a baseline for future versions.
 
 ## Next
 
-Version 2 — Data Visualization
+## Version 2 — Data Visualization (Part 1)
+
+In part 1 (I have done visualtions with bar charts and scatter plots)
+- Only Category vs Sales has a clear difference
+
+## Next steps to do
+
+- Understand the data with better visualization techniques 
