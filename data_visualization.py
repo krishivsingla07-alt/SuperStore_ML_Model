@@ -4,34 +4,12 @@ import pandas as pd
 
 new = copy[["Quantity", "Discount", "Segment", "Category", "Region"]]
 
-#relationship between Quantity and sales
-plt.scatter(new[["Quantity"]], y, color = "orange", label = "Quantity vs Sales")
-plt.xlabel("Quantity")
-plt.ylabel("Sales")
-plt.legend()
-plt.show()
-
-
-# # #relationship between Discount and sales
-plt.scatter(new[["Discount"]], y, color = "blue")
-plt.title("Discount vs Sales")
-plt.xlabel("Discount in %")
-plt.ylabel("Sales")
-plt.show()
-
-# #relationship between Segment and sales (categorical: Bar)
-segemtn_result = copy.groupby("Segment")["Sales"].mean()
-plt.bar(segemtn_result.index, segemtn_result.values)
-plt.xlabel("Segment")
-plt.ylabel("Sales")
-plt.show()
-
-#relationship between Categories and sales
+# #relationship between Categories and sales
 category_result = copy.groupby("Category")["Sales"].mean()
 plt.bar(category_result.index, category_result.values)
 plt.xlabel("Category")
 plt.ylabel("Sales")
-plt.show()
+# plt.show()
 
 
 region_sales = copy.groupby("Region")["Sales"].mean()
@@ -42,6 +20,33 @@ plt.title("Average Sales by Region")
 plt.xlabel("Region")
 plt.ylabel("Average Sales")
 
-plt.show()
+# plt.show()
 
-#this is all giving average values of each category, so we can use boxplot to check how it actually does these things
+#Box Plot between Category and sales
+categorical_sales = copy["Category"].unique()
+cateforical = []
+
+for category in categorical_sales:
+    sales_c = copy[copy["Category"] == category]["Sales"]
+    cateforical.append(sales_c)
+
+plt.boxplot(cateforical)
+plt.title("Categorical Sales")
+plt.xticks(range(1,len(categorical_sales)+1), categorical_sales)
+plt.grid()
+# plt.show()
+
+#Now to find correlation
+
+correlation = copy[["Quantity", "Discount", "Sales"]].corr()
+print(correlation)
+
+plt.imshow(correlation)
+plt.colorbar()
+
+plt.xticks(range(len(correlation.columns)), correlation.columns)
+plt.yticks(range(len(correlation.columns)), correlation.columns)
+
+plt.title("Correlation Heatmap")
+
+plt.show()
