@@ -50,3 +50,20 @@ plt.yticks(range(len(correlation.columns)), correlation.columns)
 plt.title("Correlation Heatmap")
 
 plt.show()
+
+#scatter between month and sales
+monthly = copy.groupby("Month")["Sales"].sum()
+plt.bar(monthly.index, monthly.values)
+plt.title("Monthly Sales")
+plt.show()
+
+#monthly+yearly
+
+yearly_monthly = copy.groupby("Days")["Sales"].mean()
+yearly_monthly.plot(kind="line")
+plt.show()
+
+
+plt.plot(copy["Sales"])
+plt.show()
+
